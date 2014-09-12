@@ -4,27 +4,27 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.content.Intent;
+import android.widget.TextView;
 
-
-public class SimpleUI extends ActionBarActivity {
-
-    public final static String ExtraMessage = "com.example.asadali.simpleui";
+public class DisplayMessageActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simple_ui);
+        Intent intent = getIntent();
+        String message = intent.getStringExtra(SimpleUI.ExtraMessage);
+        TextView textView = new TextView(this);
+        textView.setTextSize(40);
+        textView.setText(message);
+        setContentView(textView);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.simple_ui, menu);
+        getMenuInflater().inflate(R.menu.display_message, menu);
         return true;
     }
 
@@ -38,21 +38,5 @@ public class SimpleUI extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void sendMessage(View view)
-    {
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText)findViewById(R.id.edit_message);
-        String message = editText.getText().toString();
-        intent.putExtra(ExtraMessage, message);
-        startActivity(intent);
-//        OR
-//          EditText editText = (EditText)findViewById(R.id.edit_message);
-//          String message = editText.getText().toString();
-//          message = message + "abc";
-//          editText.setText(message);
-
-
     }
 }
